@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macros %}
-{% import "bootstrap/wtf.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block content%}
 <div class="container-fluid">
@@ -23,7 +23,7 @@
         {% if current_user.is_authenticated %}
         {{ wtf.quick_form(comment_form) }}
         {%endif%}
-        {{macro.displayComments(comments)}}
+        {{macros.displayComments(comments)}}
     </div>
 </div>
 {%endblock%}

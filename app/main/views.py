@@ -22,45 +22,8 @@ def index():
    employee_pitches = Pitch.get_pitches('employee')
    sport_pitches = Pitch.get_pitches('sport')
 
-#    print(search_movie)
-#    if search_movie:
-#        return redirect(url_for('.index',movie_name=search_movie))
-#    else:
-       return render_template('index.html', title = title, competitor = competitor_pitches, employee = employee_pitches,sport = sport_pitches )
-# @main.route('/user/<uname>')
-# def movie(id):
-#    '''
-#    View movie page function that returns the movie details page and its data
-#    '''
-#    movie = get_movie(id)
-#    title = f'{movie.title}'
-#    reviews = Review.get_reviews(movie.id)
-#    return render_template('movie.html',title = title,movie = movie,reviews = reviews)
-# @main.route('/search/<movie_name>')
-# def search(movie_name):
-#    '''
-#    View function to display the search results
-#    '''
-#    movie_name_list = movie_name.split(" ")
-#    movie_name_format = "+".join(movie_name_list)
-#    searched_movies = search_movie(movie_name_format)
-#    title = f'search results for {movie_name}'
-#    return render_template('search.html',movies = searched_movies)
-# @main.route('/movie/review/new/<int:id>', methods = ['GET','POST'])
-# @login_required
-# def new_review(id):
-#    form = ReviewForm()
-#    movie = get_movie(id)
-#    if form.validate_on_submit():
-#        title = form.title.data
-#        review = form.review.data
-#        # Updated review instance
-#        new_review = Review(movie_id=movie.id,movie_title=title,image_path=movie.poster,movie_review=review,user=current_user)
-#        new_review.save_review()
-#        #    return redirect(url_for('.new_review',id = movie.id ))
-#        return redirect(url_for('.movie',id = movie.id ))
-#    title = f'{movie.title} review'
-#    return render_template('new_review.html',title = title, review_form=form, movie=movie)
+
+   return render_template('index.html', title = title, competitor = competitor_pitches, employee = employee_pitches,sport = sport_pitches )
 
 @main.route('/user/<uname>') 
 def profile(uname):
@@ -101,20 +64,15 @@ def update_pic(uname):
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
-    return redirect(url_for('main.profile',uname=uname))
+        return redirect(url_for('main.profile',uname=uname))
 
-# @main.route('/review/<int:id>')
-# def single_review(id):
-#     review=Review.query.get(id)
-#     if review is None:
-#         abort(404)
-#     format_review = markdown2.markdown(review.movie_review,extras=["code-friendly", "fenced-code-blocks"])
-#     return render_template('review.html',review = review,format_review=format_review)
+    return render_template('review.html',review = review,format_review=format_review)
 
 @main.route('/pitch/new', methods = ['GET','POST'])
 @login_required
 def new_pitch():
     pitch_form = PitchForm()
+    
     if pitch_form.validate_on_submit():
         title = pitch_form.title.data
         pitch = pitch_form.text.data
@@ -122,6 +80,7 @@ def new_pitch():
         #pitch instance
         new_pitch = Pitch(pitch_title=title,pitch_content=pitch,category=category,user=current_user,likes=0,dislikes=0)
         #save ptch
+        print(new_pitch.pitch_title)
         new_pitch.save_pitch()
         return redirect(url_for('.index'))
 
@@ -144,10 +103,10 @@ def  sport_pitches():
     pitches = Pitch.get_pitches('sport')
     return render_template("sport_pitches.html", pitches = pitches)
 
-@main.route('pitch/<int:id>', methods = ['GET','POST'])
+@main.route('/pitch/<int:id>', methods = ['GET','POST'])
 def pitch(id):
     pitch = Pitch.get_pitch(id)
-    posted_date = pitch.posted_date.strftime('%b %d,%Y')
+    # posted_date = pitch.posted_date.strftime('%b %d,%Y')
 
     if request.args.get("like"):
         pitch.likes = pitch.likes + 1
@@ -173,7 +132,7 @@ def pitch(id):
         new_comment.save_comment()
 
     comments = Comment.get_comments(pitch)
-    return render_template("pitch.html", pitch = pitch, comment_form = comment_form, comments = comments, date = posted_date)
+    return render_template("pitch.html", pitch = pitch, comment_form = comment_form, comments = comments)
 
 @main.route('/user/<uname>/pitches')
 def user_pitches(uname):

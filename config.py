@@ -6,10 +6,10 @@ class Config:
     General configuration parent class
     '''
    
-   
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:gasa1@localhost/one_minute_pitches'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     #  email configurations
     MAIL_SERVER = 'smtp.googlemail.com'
@@ -20,9 +20,6 @@ class Config:
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = True
 
-
-
-
 class ProdConfig(Config):
     '''
     Production  configuration child class
@@ -30,7 +27,7 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    pass
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 
 class DevConfig(Config):
@@ -40,9 +37,10 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:gasa1@localhost/one_minute_pitches'
 
     DEBUG = True
+    ENV = 'development'
     
 
 class TestConfig(Config):
@@ -53,4 +51,5 @@ config_options = {
 'production':ProdConfig,
 'test':TestConfig
 }  
+
 

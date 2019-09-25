@@ -1,6 +1,5 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-# from ..request import get_movies,get_movie,search_movie
 from ..models import User,Pitch,Comment
 from .forms import UpdateProfile,PitchForm,CommentForm
 from flask_login import login_required,current_user
@@ -11,11 +10,8 @@ import datetime
 #LIKES AND DISLIKES
 @main.route('/downvote/<int:id>',methods = ['GET','POST'])
 def downvotes(id):
-    # pitch =Pitch.get_pitches(id)
-    pitch = Pitch.query.filter_by(id=id).first()
-        
-   
     
+    pitch = Pitch.query.filter_by(id=id).first()
     pitch.downvotes = pitch.downvotes + 1
         
     db.session.add(pitch)
@@ -24,18 +20,12 @@ def downvotes(id):
     return redirect("/".format(id=pitch.id))
 @main.route('/upvote/<int:id>',methods = ['GET','POST'])
 def upvotes(id):
-    # pitch =Pitch.get_pitches(id)
+ 
     pitch = Pitch.query.filter_by(id=id).first()
-        
-    
     print(pitch)
-    
-   
     pitch.upvotes = pitch.upvotes +1
-        
     db.session.add(pitch)
     db.session.commit()
-        
     return redirect("/".format(id=pitch.id))
     return redirect(".profile".format(id=pitch.id))
 
@@ -50,16 +40,13 @@ def index():
    competitor_pitches = Pitch.get_pitches('competitor')
    employee_pitches = Pitch.get_pitches('employee')
    sport_pitches = Pitch.get_pitches('sport')
-
-
    return render_template('index.html', title = title, competitor = competitor_pitches, employee = employee_pitches,sport = sport_pitches )
 
 @main.route('/user/<uname>') 
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
     pitches_count = Pitch.count_pitches(uname)
-    # user_joined = user.date_joined.strftime('%b %d,%Y')
-
+    
     if user is None:
         abort(404)
 

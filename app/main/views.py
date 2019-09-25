@@ -8,8 +8,37 @@ from .. import db,photos
 import markdown2 
 import datetime
 
-# Review = reviews.Review
-# Views
+#LIKES AND DISLIKES
+@main.route('/downvote/<int:id>',methods = ['GET','POST'])
+def downvotes(id):
+    # pitch =Pitch.get_pitches(id)
+    pitch = Pitch.query.filter_by(id=id).first()
+        
+   
+    
+    pitch.downvotes = pitch.downvotes + 1
+        
+    db.session.add(pitch)
+    db.session.commit()
+        
+    return redirect("/".format(id=pitch.id))
+@main.route('/upvote/<int:id>',methods = ['GET','POST'])
+def upvotes(id):
+    # pitch =Pitch.get_pitches(id)
+    pitch = Pitch.query.filter_by(id=id).first()
+        
+    
+    print(pitch)
+    
+   
+    pitch.upvotes = pitch.upvotes +1
+        
+    db.session.add(pitch)
+    db.session.commit()
+        
+    return redirect("/".format(id=pitch.id))
+    return redirect(".profile".format(id=pitch.id))
+
 @main.route('/')
 def index():
    '''
@@ -77,8 +106,9 @@ def new_pitch():
         title = pitch_form.title.data
         pitch = pitch_form.text.data
         category = pitch_form.category.data
+        pitches = Pitch.query.filter_by(id=id).first()
         #pitch instance
-        new_pitch = Pitch(pitch_title=title,pitch_content=pitch,category=category,user=current_user,likes=0,dislikes=0)
+        new_pitch = Pitch(pitch_title=title,pitch_content=pitch,category=category,user=current_user,upvotes=0,downvotes=0, pitches=pitches)
         #save ptch
         print(new_pitch.pitch_title)
         new_pitch.save_pitch()

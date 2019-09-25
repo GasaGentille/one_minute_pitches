@@ -3,7 +3,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block content%}
-<div class="container-fluid">
+<div class="container-fluid" style="margin: 55px 25px; background-color:antiquewhite; padding: 60px 60px;" >
 
     <div class="row">
         <h3>{{pitch.pitch_title}}</h3>
@@ -11,11 +11,11 @@
         <p>{{pitch.pitch_content}}</p>
         <span>
             <p>Posted on {{date}} by: {{pitch.user.username|capitalize}}</p>
-            <a href="/pitch/{{pitch.id}}?like=1">
-                <i class="far fa-thumbs-up"></i></a>{{pitch.likes}}
-            <a href="/pitch/{{pitch.id}}?dislikes=1">
-                <i class="far fa-thumbs-down"></i></a>{{pitch.dislikes}}
-        </span>
+            <button href="/upvote/{{pitch.id}}">
+                <i class="far fa-thumbs-up"></i>{{pitch.upvotes}}</button>
+            <button href="/downvote/{{pitch.id}}" type="button">
+                <i class="far fa-thumbs-down"></i>{{pitch.downvotes}}
+            </span></button>
     </div>
     <div class="row">
         <h3>Comments</h3>
@@ -27,3 +27,4 @@
     </div>
 </div>
 {%endblock%}
+

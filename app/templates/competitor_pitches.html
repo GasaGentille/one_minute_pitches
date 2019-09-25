@@ -2,11 +2,12 @@
 {% import 'macros.html' as macros %}
 
 {%block content%}
-<div class="jumbotron">
-    <h2>Competitor Pitches</h2>
-</div>
-<hr>
 <div class="container">
+
+    <h2>Competitor Pitches</h2>
+
+    <hr>
+
     <div class="row">
         {{macros.displayPitches(pitches)}}
     </div>

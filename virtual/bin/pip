@@ -1,4 +1,4 @@
-#!/home/wecode/Documents/one_minute_pitches/virtual/bin/python
+#!/home/wecode/one_minute_pitches/virtual/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

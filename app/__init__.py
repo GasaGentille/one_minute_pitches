@@ -45,9 +45,6 @@ def create_app(config_name):
     mail.init_app(app)
     simple.init_app(app)
 
-    # Will add the views and forms
-     # setting config
-#     from .request import configure_request
-#     configure_request(app)
+    
 
     return app

@@ -46,7 +46,7 @@ def index():
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
     pitches_count = Pitch.count_pitches(uname)
-    
+
     if user is None:
         abort(404)
 
@@ -93,9 +93,9 @@ def new_pitch():
         title = pitch_form.title.data
         pitch = pitch_form.text.data
         category = pitch_form.category.data
-        pitches = Pitch.query.filter_by(id=id).first()
+      
         #pitch instance
-        new_pitch = Pitch(pitch_title=title,pitch_content=pitch,category=category,user=current_user,upvotes=0,downvotes=0, pitches=pitches)
+        new_pitch = Pitch(pitch_title=title,pitch_content=pitch,category=category,user=current_user,upvotes=0,downvotes=0)
         #save ptch
         print(new_pitch.pitch_title)
         new_pitch.save_pitch()

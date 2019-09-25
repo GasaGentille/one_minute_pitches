@@ -38,11 +38,10 @@
     </div>
     <div class="col-md-9">
         <p>Number of pitches:{{pitches}}</p>
-        <p>Date joined:{{date}}</p>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" style="margin:60px;">
         <h3>Tell us about you.</h3>
         <!-- Displaying user bio -->
         {% if user.bio %}
@@ -50,7 +49,7 @@
         {%else%}
         <p>{{user.username|capitalize}}has no bio</p>
         {% endif %}
-
+      
         {% if user == current_user %}
         <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
         {% endif %}

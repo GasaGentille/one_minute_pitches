@@ -15,21 +15,22 @@
                 <li><a href="{{url_for('main.competitor_pitches')}}">Competitor</a></li>
                 <li><a href="{{url_for('main.employee_pitches')}}">Employee</a></li>
                 <li><a href="{{url_for('main.sport_pitches')}}">Sport</a></li>
+                <li><ul class="nav navbar-nav navbar-right">
+                        {% if current_user.is_authenticated %}
+                        <ul>
+                        <h3 style="color:white;">{{current_user.username}}</h3>
+                        <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</li>
+            
+                        <li style="padding:0px 0px;"><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+                        </ul>
+                          
+                        {% else %}
+                        <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
+                        {%endif%}
+                    </ul></li>
             </ul>
         </div>
 
-        <ul class="nav navbar-nav navbar-right">
-            {% if current_user.is_authenticated %}
-            <ul>
-            <h3 style="color:white;">{{current_user.username}}</h3>
-            <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</li>
-
-            <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
-            </ul>
-              
-            {% else %}
-            <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
-            {%endif%}
-        </ul>
+        
     </div>
 </div>

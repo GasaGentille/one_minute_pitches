@@ -23,14 +23,10 @@
             <ul>
             <h3 style="color:white;">{{current_user.username}}</h3>
             <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</li>
-               
-                <li><a href="{{url_for('main.user_pitches',uname=current_user.username)}}">My Pitches</a></li>
-                <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+
+            <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
             </ul>
-                <!-- <ul class="dropdown-menu">
-                    
-                </ul> -->
-            
+              
             {% else %}
             <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
             {%endif%}

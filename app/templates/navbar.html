@@ -21,9 +21,9 @@
         <ul class="nav navbar-nav navbar-right">
             {% if current_user.is_authenticated %}
             <ul>
-            <li style="color:white;padding:15px;">{{current_user.username}}</li>
+            <h3 style="color:white;">{{current_user.username}}</h3>
             <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</li>
-                <li></li>
+               
                 <li><a href="{{url_for('main.user_pitches',uname=current_user.username)}}">My Pitches</a></li>
                 <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
             </ul>

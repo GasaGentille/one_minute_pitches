@@ -20,14 +20,17 @@
 
         <ul class="nav navbar-nav navbar-right">
             {% if current_user.is_authenticated %}
-            <li style="color:white;padding:15px;">{{current_user.username}}
-                <ul class="dropdown-menu">
-                    <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</li>
-                    <li></li>
-                    <li><a href="{{url_for('main.user_pitches',uname=current_user.username)}}">My Pitches</a></li>
-                    <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
-                </ul>
-            </li>
+            <ul>
+            <li style="color:white;padding:15px;">{{current_user.username}}</li>
+            <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</li>
+                <li></li>
+                <li><a href="{{url_for('main.user_pitches',uname=current_user.username)}}">My Pitches</a></li>
+                <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+            </ul>
+                <!-- <ul class="dropdown-menu">
+                    
+                </ul> -->
+            
             {% else %}
             <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
             {%endif%}

@@ -1,33 +1,12 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..models import User,Pitch,Comment
+from ..models import User,Comment,Pitch
 from .forms import UpdateProfile,PitchForm,CommentForm
 from flask_login import login_required,current_user
 from .. import db,photos
 import markdown2 
 import datetime
 
-#LIKES AND DISLIKES
-@main.route('/downvote/<int:id>',methods = ['GET','POST'])
-def downvotes(id):
-    
-    pitch = Pitch.query.filter_by(id=id).first()
-    pitch.downvotes = pitch.downvotes + 1
-        
-    db.session.add(pitch)
-    db.session.commit()
-        
-    return redirect("/".format(id=pitch.id))
-@main.route('/upvote/<int:id>',methods = ['GET','POST'])
-def upvotes(id):
- 
-    pitch = Pitch.query.filter_by(id=id).first()
-    print(pitch)
-    pitch.upvotes = pitch.upvotes +1
-    db.session.add(pitch)
-    db.session.commit()
-    return redirect("/".format(id=pitch.id))
-    return redirect(".profile".format(id=pitch.id))
 
 @main.route('/')
 def index():
@@ -108,7 +87,9 @@ def new_pitch():
 
 def competitor_pitches():
     pitches = Pitch.get_pitches('competitor')
+    
     return render_template("competitor_pitches.html", pitches = pitches)
+
 
 @main.route('/pitches/employee_pitches')
 def  employee_pitches():
@@ -123,23 +104,22 @@ def  sport_pitches():
 @main.route('/pitch/<int:id>', methods = ['GET','POST'])
 def pitch(id):
     pitch = Pitch.get_pitch(id)
-    # posted_date = pitch.posted_date.strftime('%b %d,%Y')
 
-    if request.args.get("like"):
-        pitch.likes = pitch.likes + 1
+    if request.args.get("upvote"):
+        pitch.upvotes = pitch.upvotes + 1
 
         db.session.add(pitch)
         db.session.commit()
 
         return redirect("/pitch/{pitch_id}".format(pitch_id=pitch.id))
-        
-    elif request.args.get("dislike"):
-        pitch.dislikes = pitch.dislikes +1
+
+    elif request.args.get("downvote"):
+        pitch.downvotes = pitch.downvotes + 1
 
         db.session.add(pitch)
         db.session.commit()
 
-        return redirect("pitch/{pitch_id}".format(pitch_id = pitch.id))
+        return redirect("/pitch/{pitch_id}".format(pitch_id=pitch.id))
 
     comment_form =  CommentForm()
     if comment_form.validate_on_submit():

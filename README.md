@@ -33,10 +33,10 @@ Once started, the project can be accessed on your localhost using the address: l
 
 ## Technologies used
 
-1.Python v3.6
-2.Boostrap
-3.Flask
-4.Postgres
+* Python v3.6
+* Boostrap
+* Flask
+* Postgres
 
 ## License information
   

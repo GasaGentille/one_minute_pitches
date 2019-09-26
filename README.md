@@ -6,14 +6,14 @@
 This application helps users to build something important by writing pitches in only one minutesource so that other users can read them.
 
 The Application will help user to:
-* 1.Sign Up to have account *
-* 2.login in, write and submit pitch in any category
-* 3.See pitches others have posted
-* 4.Upvote and Dowvote pitches
-* 5.Comment on different pitches and leave feedback
-* 6.Upload profile picture
+- Sign Up to have account *
+ - login in, write and submit pitch in any category
+ - See pitches others have posted
+  4.Upvote and Dowvote pitches
+  5.Comment on different pitches and leave feedback
+  6.Upload profile picture
 
-4.You can visit the application using: https://newshighlightseven.herokuapp.com/
+4.You can visit the application using: https://oneminutepitches1.herokuapp.com/
 
 ## SetUp/Installation instructions
 

@@ -6,7 +6,7 @@ class PitchModelTest(unittest.TestCase):
 
     def setUp(self):
             self.new_user = User(username = 'James',password = 'potato', email = 'james@ms.com')
-            self.new_pitch = Pitch(id=12345,pitch_title='Test',pitch_content='Pitches test',category='competitor', user = self.user_James, likes=0, dislikes =0)
+            self.new_pitch = Pitch(id=12345,pitch_title='Test',pitch_content='Pitches test',category='competitor', user = self.user_James, upvotes=0, downvotes =0)
 
     def tearDown(self):
             Pitch.query.delete()

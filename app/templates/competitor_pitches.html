@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macros %}
 
+{% block styles %}
+{{ super()}}
+
+<link href="https://fonts.googleapis.com/css?family=Pacifico|Permanent+Marker&display=swap" rel="stylesheet">
+
+{% endblock%}
+
 {%block content%}
 <div class="container">
+    <h1 style="font-family: 'Permanent Marker', cursive;">One Minute Pitches Website</h1>
 
     <h2>Competitor Pitches</h2>
 
